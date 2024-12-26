@@ -37,6 +37,7 @@ model User {
   createdAt    DateTime     @default(now())
   updatedAt    DateTime     @updatedAt
   authoredProjects Project[]
+  deadlineExtensions DeadlineExtensions[]
 }
 
 model Comment {
@@ -112,4 +113,11 @@ model Project {
   author       User      @relation(fields: [authorId], references: [id])
   createdAt    DateTime  @default(now())
   updatedAt    DateTime  @updatedAt
+}
+
+model DeadlineExtensions {
+  id           Int       @id @default(autoincrement())
+  extendedBy   Int
+
+  user         User @relation(fields: [extendedBy], references: [id])
 }
